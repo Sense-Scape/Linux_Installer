@@ -33,10 +33,14 @@ def download_release_asset(repo_owner, repo_name, release_id):
        print(response.text)
 
 
-# Replace these values with your own
-repo_owner = 'Sense-Scape'
-repo_name = 'Sensor_Sim'
-release_id = 'v2.0.0'
 
-download_release_asset(repo_owner, repo_name, release_id)
+def main():
+    # Replace these values with your own
+    repo_owner = 'Sense-Scape'
+    repo_name = 'Sensor_Sim'
+    release_id = 'v2.0.0'
 
+    download_release_asset(repo_owner, repo_name, release_id)
+
+if __name__ == "__main__":
+    main()
