@@ -32,15 +32,22 @@ def download_release_asset(repo_owner, repo_name, release_id):
        print(f'Failed to download release assets. Status code: {response.status_code}')
        print(response.text)
 
-
-
 def main():
     # Replace these values with your own
     repo_owner = 'Sense-Scape'
-    repo_name = 'Sensor_Sim'
-    release_id = 'v2.0.0'
 
-    download_release_asset(repo_owner, repo_name, release_id)
+    data = ""
+    with open("Install.json", 'r') as file:
+            data = file.read()
 
+    # Convert file to json structure
+    import json
+    components = json.loads(data)
+
+    # Get and install all required components
+    for component_name, components_list in components.items():
+        for component in components_list:
+            download_release_asset(repo_owner, component["name"], component["version"])
+        
 if __name__ == "__main__":
     main()
