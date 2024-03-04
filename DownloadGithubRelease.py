@@ -44,6 +44,13 @@ def main():
     with open("Install.json", 'r') as file:
             data = file.read()
 
+    # Create the directory
+    import os
+    if os.path.exists("Install"):
+        os.rmdir("Install")
+    os.makedirs("Install")
+    os.chdir("Install")
+
     # Convert file to json structure
     import json
     components = json.loads(data)
