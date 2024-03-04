@@ -27,7 +27,13 @@ def download_release_asset(repo_owner, repo_name, release_id):
 
         # And provide read, write, run permissions
         import os
-        os.chmod(repo_name+"/"+repo_name, 0o755)
+        files = os.listdir(repo_name)
+    
+        # Set read and write permissions for 
+        # each file in component folder
+        for file in files:
+            file_path = os.path.join(repo_name, file)
+            os.chmod(file_path, 0o755)
 
         # Remove zip file
         os.remove(repo_name+"/"+repo_name+".zip")
@@ -46,8 +52,10 @@ def main():
 
     # Create the directory
     import os
+    import shutil
     if os.path.exists("Install"):
-        os.rmdir("Install")
+        shutil.rmtree("Install")
+
     os.makedirs("Install")
     os.chdir("Install")
 
