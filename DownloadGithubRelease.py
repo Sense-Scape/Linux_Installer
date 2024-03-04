@@ -25,6 +25,10 @@ def download_release_asset(repo_owner, repo_name, release_id):
         with zipfile.ZipFile(repo_name+"/"+repo_name+".zip", 'r') as zip_ref:
             zip_ref.extractall(repo_name)
 
+        # And provide read, write, run permissions
+        import os
+        os.chmod(repo_name+"/"+repo_name, 0o755)
+
         # Remove zip file
         os.remove(repo_name+"/"+repo_name+".zip")
 
