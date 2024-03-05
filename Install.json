@@ -2,19 +2,23 @@
     "components": [
         {
             "name": "Sensor_Sim",
-            "version": "v2.0.0"
+            "version": "v2.0.0",
+            "Type": "C++"
         },
         {
             "name": "Proc_Serv",
-            "version": "v2.0.1"
+            "version": "v2.0.1",
+            "Type": "C++"
         },
         {
             "name": "TCP_Websocket_Adapter",
-            "version": "v2.0.0"
+            "version": "v2.0.0",
+            "Type": "C++"
         },
         {
             "name": "Sensor_Viewer",
-            "version": "v2.0.0"
+            "version": "v2.0.1",
+            "Type": "Svelte"
         }
     ]
 }
