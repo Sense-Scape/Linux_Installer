@@ -1,0 +1,13 @@
+[Unit]
+Description={Name}
+
+[Service]
+WorkingDirectory=/opt/{Name}
+ExecStart=/opt/{Name}/{Name}
+Restart=on-failure
+RestartSec=10
+StartLimitInterval=10s
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
