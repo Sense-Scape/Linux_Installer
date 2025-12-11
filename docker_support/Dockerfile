@@ -1,28 +1,35 @@
 FROM debian:11
 
-# Update package lists
-RUN apt-get update && apt-get upgrade -y
+# Update package lists and install essential packages, including bash
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y bash
 
-# c++ Apt Packages
-RUN apt-get install libsndfile1 -y
-RUN apt-get install libsndfile1-dev -y
-RUN apt-get install libasound2-dev -y
+# c++ Apt Packages (Combined to reduce layers)
+RUN apt-get install -y \
+    libc6-dev \
+    libsndfile1 \
+    libsndfile1-dev \
+    libasound2-dev \
+    build-essential \
+    cmake \
+    libpng-dev \
+    libgtest-dev \
+    libgps-dev
 
-RUN apt-get install -y build-essential
-RUN apt-get update && apt-get install -y cmake
-
-RUN apt-get install -y libpng-dev
-RUN apt-get install -y libgtest-dev
-
-RUN apt-get install -y libgps-dev
-
-# Python Apt Packages
-RUN apt-get install -y libcap-dev
-RUN  apt-get install -y python3 python3-pip
+# Python Apt Packages (Combined to reduce layers)
+RUN apt-get install -y \
+    libcap-dev \
+    python3 \
+    python3-pip \
+    libcurl4-openssl-dev
 
 WORKDIR /home
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["sh", "-c", "while true; do sleep 1; done"]
-
+# --- CHANGE MADE HERE ---
+# Specify "/bin/bash" instead of "sh" to execute the loop command.
+# This ensures the shell running the script is bash.
+CMD ["/bin/bash", "-c", "while true; do sleep 1; done"]
+# ------------------------
